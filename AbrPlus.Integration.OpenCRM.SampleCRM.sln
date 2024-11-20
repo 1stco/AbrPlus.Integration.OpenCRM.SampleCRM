@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbrPlus.Integration.OpenCRM.SampleCRM", "AbrPlus.Integration.OpenCRM.SampleCRM\AbrPlus.Integration.OpenCRM.SampleCRM.csproj", "{604C555B-3353-44E2-B7E6-782587B1AD4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbrPlus.Integration.OpenCRM.SampleWinFormClient", "AbrPlus.Integration.OpenCRM.SampleWinFormClient\AbrPlus.Integration.OpenCRM.SampleWinFormClient.csproj", "{7086F309-6670-45B6-AFFD-D623926F032F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{604C555B-3353-44E2-B7E6-782587B1AD4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{604C555B-3353-44E2-B7E6-782587B1AD4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{604C555B-3353-44E2-B7E6-782587B1AD4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{604C555B-3353-44E2-B7E6-782587B1AD4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7086F309-6670-45B6-AFFD-D623926F032F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7086F309-6670-45B6-AFFD-D623926F032F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7086F309-6670-45B6-AFFD-D623926F032F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7086F309-6670-45B6-AFFD-D623926F032F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5926AEC1-C8B5-4778-B19D-7F805545AF63}
+	EndGlobalSection
+EndGlobal

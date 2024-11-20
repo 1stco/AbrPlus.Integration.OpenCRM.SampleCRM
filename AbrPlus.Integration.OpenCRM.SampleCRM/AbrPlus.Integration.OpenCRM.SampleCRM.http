@@ -1,0 +1,6 @@
+@AbrPlus.Integration.OpenCRM.SampleCRM_HostAddress = http://localhost:5052
+
+GET {{AbrPlus.Integration.OpenCRM.SampleCRM_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
