@@ -1,14 +1,17 @@
 using AbrPlus.Cloud.Stream.Hubs;
 using AbrPlus.Integration.OpenCRM.SampleCRM.DI;
 using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers().AddJsonOptions(opts =>
+builder.Services.AddControllers(t =>
+{
+    t.OutputFormatters.RemoveType<HttpNoContentOutputFormatter>();
+}).AddJsonOptions(opts =>
 {
     var enumConverter = new JsonStringEnumConverter();
     opts.JsonSerializerOptions.Converters.Add(enumConverter);
