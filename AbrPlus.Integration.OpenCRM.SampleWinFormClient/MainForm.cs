@@ -23,8 +23,11 @@ namespace AbrPlus.Integration.OpenCRM.SampleCRM.Client.UI
                 });
 
                 _crmSampleSignalRClient.OnConnectionClosed += _crmSampleSignalRClient_OnConnectionClosed;
+                _crmSampleSignalRClient.OnCallCreated += _crmSampleSignalRClient_OnCallCreated;
+                _crmSampleSignalRClient.OnCallUpdated += _crmSampleSignalRClient_OnCallUpdated;
                 _crmSampleSignalRClient.OnCallChannelCreated += _crmSampleSignalRClient_OnCallChannelCreated;
-
+                _crmSampleSignalRClient.OnCallChannelUpdated += _crmSampleSignalRClient_OnCallChannelUpdated;
+                _crmSampleSignalRClient.OnCallMerged += _crmSampleSignalRClient_OnCallMerged;
 
                 await _crmSampleSignalRClient.InitialClient();
                 await _crmSampleSignalRClient.StartConnection();
@@ -38,25 +41,57 @@ namespace AbrPlus.Integration.OpenCRM.SampleCRM.Client.UI
             }
         }
 
-        private void _crmSampleSignalRClient_OnCallChannelCreated(Requests.CallChannelCreateRequest obj)
+        private void _crmSampleSignalRClient_OnCallUpdated(CallUpdateRequest obj)
         {
-            if (listBox_Events.InvokeRequired)
+            TryAddEvent(obj);
+        }
+
+        private void _crmSampleSignalRClient_OnCallCreated(CallCreateRequest obj)
+        {
+            TryAddEvent(obj);
+        }
+
+        private void _crmSampleSignalRClient_OnCallChannelCreated(CallChannelCreateRequest obj)
+        {
+            TryAddEvent(obj);
+        }
+
+        private void _crmSampleSignalRClient_OnCallChannelUpdated(CallChannelUpdateRequest obj)
+        {
+            TryAddEvent(obj);
+        }
+
+        private void _crmSampleSignalRClient_OnCallMerged(MergeCallRequest obj)
+        {
+            TryAddEvent(obj);
+        }
+
+        private void TryAddEvent(object obj)
+        {
+            try
             {
-                listBox_Events.Invoke(() =>
+                if (listBox_Events.InvokeRequired)
+                {
+                    listBox_Events.Invoke(() =>
+                    {
+                        AddEvent(obj);
+                    });
+                }
+                else
                 {
                     AddEvent(obj);
-                });
+                }
             }
-            else
+            catch (Exception ex)
             {
-                AddEvent(obj);
+                // log error
             }
         }
 
-        private void AddEvent(CallChannelCreateRequest obj)
+        private void AddEvent(object obj)
         {
             //check ChannelState is Ring or Ringing and peerName is your entension number
-            listBox_Events.Items.Add($"new channel created. peerName:{obj.PeerName}, state:{obj.ChannelState}");
+            listBox_Events.Items.Add(System.Text.Json.JsonSerializer.Serialize(obj));
         }
 
         private async Task CloseConnection()

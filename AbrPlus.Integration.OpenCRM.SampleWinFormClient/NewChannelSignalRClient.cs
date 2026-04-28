@@ -4,7 +4,11 @@ namespace AbrPlus.Integration.OpenCRM.SampleCRM.Client.UI
 {
     internal class NewChannelSignalRClient : BaseCrmSampleSignalRClient
     {
+        public event Action<CallCreateRequest> OnCallCreated;
+        public event Action<CallUpdateRequest> OnCallUpdated;
         public event Action<CallChannelCreateRequest> OnCallChannelCreated;
+        public event Action<CallChannelUpdateRequest> OnCallChannelUpdated;
+        public event Action<MergeCallRequest> OnCallMerged;
         public event Action OnConnectionClosed;
         public NewChannelSignalRClient(Func<SignalRConfig, Task> signalRClientConfigure) : base(signalRClientConfigure)
         {
@@ -30,14 +34,33 @@ namespace AbrPlus.Integration.OpenCRM.SampleCRM.Client.UI
             return base.Connection_Closed(arg);
         }
 
+        protected override Task CallCreated(CallCreateRequest request)
+        {
+            OnCallCreated?.Invoke(request);
+            return base.CallCreated(request);
+        }
+        protected override Task CallUpdated(CallUpdateRequest request)
+        {
+            OnCallUpdated?.Invoke(request);
+            return base.CallUpdated(request);
+        }
+
         protected override Task CallChannelCreated(CallChannelCreateRequest request)
         {
-            if (OnCallChannelCreated != null)
-            {
-                OnCallChannelCreated(request);
-            }
+            OnCallChannelCreated?.Invoke(request);
             return base.CallChannelCreated(request);
         }
 
+        protected override Task CallChannelUpdated(CallChannelUpdateRequest request)
+        {
+            OnCallChannelUpdated?.Invoke(request);
+            return base.CallChannelUpdated(request);
+        }
+
+        protected override Task MergeCall(MergeCallRequest request)
+        {
+            OnCallMerged?.Invoke(request);
+            return base.MergeCall(request);
+        }
     }
 }
