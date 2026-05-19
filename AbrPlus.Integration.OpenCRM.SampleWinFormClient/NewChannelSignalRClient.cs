@@ -9,6 +9,8 @@ namespace AbrPlus.Integration.OpenCRM.SampleCRM.Client.UI
         public event Action<CallChannelCreateRequest> OnCallChannelCreated;
         public event Action<CallChannelUpdateRequest> OnCallChannelUpdated;
         public event Action<MergeCallRequest> OnCallMerged;
+        public event Action<SubmitQueueOperatorVotingRequest> OnSubmitQueueOperatorVoting;
+        public event Action<SubmitVotingRequest> OnSubmitVoting;
         public event Action OnConnectionClosed;
         public NewChannelSignalRClient(Func<SignalRConfig, Task> signalRClientConfigure) : base(signalRClientConfigure)
         {
@@ -61,6 +63,18 @@ namespace AbrPlus.Integration.OpenCRM.SampleCRM.Client.UI
         {
             OnCallMerged?.Invoke(request);
             return base.MergeCall(request);
+        }
+
+        protected override Task SubmitQueueOperatorVoting(SubmitQueueOperatorVotingRequest request)
+        {
+            OnSubmitQueueOperatorVoting?.Invoke(request);
+            return base.SubmitQueueOperatorVoting(request);
+        }
+
+        protected override Task SubmitVoting(SubmitVotingRequest request)
+        {
+            OnSubmitVoting?.Invoke(request);
+            return base.SubmitVoting(request);
         }
     }
 }

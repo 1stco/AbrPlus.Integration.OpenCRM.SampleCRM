@@ -28,6 +28,8 @@ namespace AbrPlus.Integration.OpenCRM.SampleCRM.Client.UI
                 _crmSampleSignalRClient.OnCallChannelCreated += _crmSampleSignalRClient_OnCallChannelCreated;
                 _crmSampleSignalRClient.OnCallChannelUpdated += _crmSampleSignalRClient_OnCallChannelUpdated;
                 _crmSampleSignalRClient.OnCallMerged += _crmSampleSignalRClient_OnCallMerged;
+                _crmSampleSignalRClient.OnSubmitQueueOperatorVoting += _crmSampleSignalRClient_OnSubmitQueueOperatorVoting;
+                _crmSampleSignalRClient.OnSubmitVoting += _crmSampleSignalRClient_OnSubmitVoting;
 
                 await _crmSampleSignalRClient.InitialClient();
                 await _crmSampleSignalRClient.StartConnection();
@@ -39,6 +41,16 @@ namespace AbrPlus.Integration.OpenCRM.SampleCRM.Client.UI
                 btn_Start.Enabled = true;
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void _crmSampleSignalRClient_OnSubmitVoting(SubmitVotingRequest obj)
+        {
+            TryAddEvent(obj);
+        }
+
+        private void _crmSampleSignalRClient_OnSubmitQueueOperatorVoting(SubmitQueueOperatorVotingRequest obj)
+        {
+            TryAddEvent(obj);
         }
 
         private void _crmSampleSignalRClient_OnCallUpdated(CallUpdateRequest obj)

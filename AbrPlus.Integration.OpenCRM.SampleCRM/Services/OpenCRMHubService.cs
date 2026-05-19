@@ -82,5 +82,31 @@ namespace AbrPlus.Cloud.Stream.Services
                 throw;
             }
         }
+
+        public async Task SubmitQueueOperatorVoting(SubmitQueueOperatorVotingRequest request)
+        {
+            try
+            {
+                await _streamHub.Clients.All.SendAsync("SubmitQueueOperatorVoting", request);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "SubmitQueueOperatorVoting has error. SubmitQueueOperatorVotingRequest is {@request}", request);
+                throw;
+            }
+        }
+
+        public async Task SubmitVoting(SubmitVotingRequest request)
+        {
+            try
+            {
+                await _streamHub.Clients.All.SendAsync("SubmitVoting", request);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "SubmitVoting has error. SubmitVoting is {@request}", request);
+                throw;
+            }
+        }
     }
 }

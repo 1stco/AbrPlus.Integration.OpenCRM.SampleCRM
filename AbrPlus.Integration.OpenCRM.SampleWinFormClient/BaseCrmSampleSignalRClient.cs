@@ -53,6 +53,8 @@ namespace AbrPlus.Integration.OpenCRM.SampleCRM.Client.UI
             connection.On<CallCreateRequest>("CallCreated", CallCreated);
             connection.On<CallUpdateRequest>("CallUpdated", CallUpdated);
             connection.On<MergeCallRequest>("MergeCall", MergeCall);
+            connection.On<SubmitQueueOperatorVotingRequest>("SubmitQueueOperatorVoting", SubmitQueueOperatorVoting);
+            connection.On<SubmitVotingRequest>("SubmitVoting", SubmitVoting);
         }
 
         protected virtual Task Connection_Reconnected(string arg)
@@ -126,6 +128,24 @@ namespace AbrPlus.Integration.OpenCRM.SampleCRM.Client.UI
         /// <param name="request">new channel request model</param>
         /// <returns></returns>
         protected virtual Task MergeCall(MergeCallRequest request)
+        {
+            return Task.CompletedTask;
+        }
+        /// <summary>
+        /// Occurs when QueueOperatorVoting Submited
+        /// </summary>
+        /// <param name="request">new SubmitQueueOperatorVoting request model</param>
+        /// <returns></returns>
+        protected virtual Task SubmitQueueOperatorVoting(SubmitQueueOperatorVotingRequest request)
+        {
+            return Task.CompletedTask;
+        }
+        /// <summary>
+        /// Occurs when Voting Submited
+        /// </summary>
+        /// <param name="request">new SubmitVoting request model</param>
+        /// <returns></returns>
+        protected virtual Task SubmitVoting(SubmitVotingRequest request)
         {
             return Task.CompletedTask;
         }

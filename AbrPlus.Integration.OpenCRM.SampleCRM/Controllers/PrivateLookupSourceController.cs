@@ -1,127 +1,134 @@
-﻿using AbrPlus.Integration.OpenCRM.Requests;
+using AbrPlus.Integration.OpenCRM.Requests;
 using AbrPlus.Integration.OpenCRM.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AbrPlus.Integration.OpenCRM.SampleCRM.Controllers
 {
     [ApiController]
-    public class LookupSourceController : ControllerBase
+    [Route("private")]
+    [Authorize]
+    public class PrivateLookupSourceController : ControllerBase
     {
+        private readonly ILookupSourceActionsService _actions;
 
-        private readonly ILogger<LookupSourceController> _logger;
-
-        public LookupSourceController(ILogger<LookupSourceController> logger)
+        public PrivateLookupSourceController(ILookupSourceActionsService actions)
         {
-            _logger = logger;
+            _actions = actions;
         }
-        [HttpGet("/financial/moneyAccounts")]
+
+        [HttpGet("financial/moneyAccounts")]
         public Task<MoneyAccountsResponse> GetMoneyAccounts()
         {
-            throw new NotImplementedException();
+            return _actions.GetMoneyAccounts();
         }
-        [HttpGet("/financial/billableObjectTypes")]
+
+        [HttpGet("financial/billableObjectTypes")]
         public Task<BillableObjectTypesResponse> GetBillableObjectTypes()
         {
-            throw new NotImplementedException();
+            return _actions.GetBillableObjectTypes();
         }
-        [HttpGet("/financial/billableObjectTypeProps")]
+
+        [HttpGet("financial/billableObjectTypeProps")]
         public Task<BillableObjectTypePropsResponse> GetBillableObjectTypeProps([FromQuery] BillableObjectTypePropsRequest billableObjectTypePropsRequest)
         {
-            throw new NotImplementedException();
+            return _actions.GetBillableObjectTypeProps(billableObjectTypePropsRequest);
         }
-        [HttpGet("/financial/paymentInfo")]
+
+        [HttpGet("financial/paymentInfo")]
         public Task<PaymentResponse> GetPaymentInfo([FromQuery] PaymentInfoRequest paymentInfoRequest)
         {
-            throw new NotImplementedException();
+            return _actions.GetPaymentInfo(paymentInfoRequest);
         }
-        [HttpPost("/financial/sendPaymentLinkToUser")]
+
+        [HttpPost("financial/sendPaymentLinkToUser")]
         public Task<SendPaymentLinkToUserResponse> SendPaymentLinkToUser([FromBody] SendPaymentLinkToUserRequest sendPaymentLinkToUserRequest)
         {
-            throw new NotImplementedException();
+            return _actions.SendPaymentLinkToUser(sendPaymentLinkToUserRequest);
         }
 
-
-        [HttpGet("/general/findCrmObjectUrl")]
+        [HttpGet("general/findCrmObjectUrl")]
         public Task<CrmObjectUrlResponse> GetCrmObjectUrl([FromQuery] CrmObjectUrlRequest crmObjectUrlRequest)
         {
-            throw new NotImplementedException();
+            return _actions.GetCrmObjectUrl(crmObjectUrlRequest);
         }
 
-
-        [HttpGet("/user/cardtable")]
+        [HttpGet("user/cardtable")]
         public Task<CardtableResponse> GetCardtable([FromQuery] CardtableRequest cardtableRequest)
         {
-            throw new NotImplementedException();
+            return _actions.GetCardtable(cardtableRequest);
         }
-        [HttpGet("/user/defaultExtension")]
+
+        [HttpGet("user/defaultExtension")]
         public Task<UserExtensionResponse> GetUserDefaultExtension([FromQuery] UserExtensionRequest userExtensionRequest)
         {
-            throw new NotImplementedException();
+            return _actions.GetUserDefaultExtension(userExtensionRequest);
         }
-        [HttpGet("/user/userInfoByIdentityId")]
+
+        [HttpGet("user/userInfoByIdentityId")]
         public Task<UserResponse> GetUserInfoByIdentityId([FromQuery] UserInfoByIdentityRequest userInfoByIdentityRequest)
         {
-            throw new NotImplementedException();
+            return _actions.GetUserInfoByIdentityId(userInfoByIdentityRequest);
         }
-        [HttpGet("/user/userExtensions")]
+
+        [HttpGet("user/userExtensions")]
         public Task<UserTelephonySystemResponse> GetUserExtensions([FromQuery] UserExtensionsRequest userExtenstionsRequest)
         {
-            throw new NotImplementedException();
+            return _actions.GetUserExtensions(userExtenstionsRequest);
         }
-        [HttpGet("/user/userManagerExtension")]
+
+        [HttpGet("user/userManagerExtension")]
         public Task<UserExtensionResponse> GetUserManagerExtension([FromQuery] UserManagerByExtensionRequest userManagerByExtensionRequest)
         {
-            throw new NotImplementedException();
+            return _actions.GetUserManagerExtension(userManagerByExtensionRequest);
         }
 
-
-        [HttpGet("/identity/findByCustomerInfo")]
+        [HttpGet("identity/findByCustomerInfo")]
         public Task<IdentityResponse> GetIdentityByCustomerInfo([FromQuery] CustomerRequest customerRequest)
         {
-            throw new NotImplementedException();
+            return _actions.GetIdentityByCustomerInfo(customerRequest);
         }
-        [HttpGet("/identity/findByPhoneNumber")]
+
+        [HttpGet("identity/findByPhoneNumber")]
         public Task<IdentityResponse> GetIdentityByPhoneNumber([FromQuery] IdentityByPhoneNumberRequest identityByPhoneNumberRequest)
         {
-            throw new NotImplementedException();
+            return _actions.GetIdentityByPhoneNumber(identityByPhoneNumberRequest);
         }
-        [HttpGet("/identity/findByCustomerNumber")]
+
+        [HttpGet("identity/findByCustomerNumber")]
         public Task<IdentityResponse> GetIdentityByCustomerNumber([FromQuery] IdentityByCustomerNumberRequest identityByCustomerNumberRequest)
         {
-            throw new NotImplementedException();
+            return _actions.GetIdentityByCustomerNumber(identityByCustomerNumberRequest);
         }
-        [HttpGet("/identity/balance")]
+
+        [HttpGet("identity/balance")]
         public Task<IdentityBalanceResponse> GetIdentityBalance([FromQuery] CustomerRequest customerRequest)
         {
-            throw new NotImplementedException();
+            return _actions.GetIdentityBalance(customerRequest);
         }
 
-
-        [HttpPost("/invoice/salesInvoice")]
+        [HttpPost("invoice/salesInvoice")]
         public Task<CreateInvoiceResponse> CreateInvoice([FromBody] CreateSalesInvoiceRequest createSalesInvoiceRequest)
         {
-            throw new NotImplementedException();
+            return _actions.CreateInvoice(createSalesInvoiceRequest);
         }
 
-
-
-        [HttpGet("/contract/identityContractStatus")]
+        [HttpGet("contract/identityContractStatus")]
         public Task<IdentityContractStatusResponse> GetIdentityContractStatus([FromQuery] IdentityContractStatusRequest identityHasValidContractRequest)
         {
-            throw new NotImplementedException();
+            return _actions.GetIdentityContractStatus(identityHasValidContractRequest);
         }
 
-
-
-        [HttpPost("/voting/queueOperatorVoting")]
+        [HttpPost("voting/queueOperatorVoting")]
         public Task<SubmitQueueOperatorVotingResponse> SubmitQueueOperatorVoting([FromBody] SubmitQueueOperatorVotingRequest submitQueueOperatorVotingRequest)
         {
-            throw new NotImplementedException();
+            return _actions.SubmitQueueOperatorVoting(submitQueueOperatorVotingRequest);
         }
-        [HttpPost("/voting/voting")]
+
+        [HttpPost("voting/voting")]
         public Task<SubmitVotingResponse> SubmitVoting([FromBody] SubmitVotingRequest submitVotingRequest)
         {
-            throw new NotImplementedException();
+            return _actions.SubmitVoting(submitVotingRequest);
         }
     }
 }

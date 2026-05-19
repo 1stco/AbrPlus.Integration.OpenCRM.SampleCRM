@@ -9,5 +9,7 @@ namespace AbrPlus.Cloud.Stream.IService
         Task SendCallCreatedAsync(CallCreateRequest request);
         Task SendCallUpdatedAsync(CallUpdateRequest callUpdateRequest);
         Task SendMergeCallAsync(MergeCallRequest mergeCallRequest);
+        Task SubmitQueueOperatorVoting(SubmitQueueOperatorVotingRequest mergeCallRequest);
+        Task SubmitVoting(SubmitVotingRequest mergeCallRequest);
     }
 }
